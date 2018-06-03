@@ -1,8 +1,8 @@
 <template>
 <div class="all">
   <timer-line :remain-min="remainMin" :remainSec="remainSec"></timer-line>
-  <button class="all__button" v-if="!isCount" @click='startTimer'>start</button>
-  <button class="all__button" v-if="isCount" @click='stopTimer'>stop</button>
+  <button class="all__button-start" v-if="!isCount" @click='startTimer'>start</button>
+  <button class="all__button-stop" v-if="isCount" @click='stopTimer'>stop</button>
 </div>
 </template>
 
@@ -106,9 +106,21 @@ export default {
   align-items: center;
 }
 
-.all__button {
+.all__button-start,
+.all__button-stop {
+  font-size: 18px;
   width: 100px;
   height: 50px;
-  font-size: 18px;
+  border-radius: 15px;
+  border: none;
+}
+
+.all__button-start {
+  background: #fff;
+}
+
+.all__button-stop {
+  background: #1d1c22;
+  color: #fff;
 }
 </style>
