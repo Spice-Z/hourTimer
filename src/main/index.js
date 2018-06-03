@@ -21,9 +21,17 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 700,
+    height: 400,
     useContentSize: true,
-    width: 300
+    width: 300,
+    webPreferences: {
+      defaultFontFamily: {
+        standard: "Meiryo UI",
+        serif: "MS PMincho",
+        sansSerif: "Meiryo UI",
+        monospace: "MS Gothic"
+      }
+    }
   });
 
   mainWindow.loadURL(winURL);

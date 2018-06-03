@@ -1,9 +1,8 @@
 <template>
-<div id="wrapper">
-  <p>{{ remainMin }}:{{ remainSec }}</p>
-  <button v-if="!isCount" @click='startTimer'>start</button>
-  <button v-if="isCount" @click='stopTimer'>stop</button>
+<div class="all">
   <timer-line :remain-min="remainMin" :remainSec="remainSec"></timer-line>
+  <button class="all__button" v-if="!isCount" @click='startTimer'>start</button>
+  <button class="all__button" v-if="isCount" @click='stopTimer'>stop</button>
 </div>
 </template>
 
@@ -97,5 +96,19 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  width: 100%;
+}
+
+.all {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.all__button {
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
 }
 </style>
