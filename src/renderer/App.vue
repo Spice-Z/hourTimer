@@ -20,5 +20,6 @@ body {
   -webkit-app-region: drag;
   background: #323338;
   color: #f7f7f7;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 </style>

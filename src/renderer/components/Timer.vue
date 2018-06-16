@@ -1,19 +1,18 @@
 <template>
 <div class="all">
   <timer-line :remain-min="remainMin" :remainSec="remainSec"></timer-line>
-  <button class="all__button-start" v-if="!isCount" @click='startTimer'>start</button>
-  <button class="all__button-stop" v-if="isCount" @click='stopTimer'>stop</button>
+  <button class="all__button-start" v-if="!isCount" @click='startTimer'></button>
+  <button class="all__button-stop" v-if="isCount" @click='stopTimer'></button>
+  <button class="all__button-reset" v-if="!isCount" @click='resetTimer'></button>
 </div>
 </template>
 
 <script>
-import Pie from "@/components/Pie";
 import TimerLine from "@/components/TimerLine";
 
 export default {
   name: "timer",
   components: {
-    Pie,
     TimerLine
   },
   data: function() {
@@ -54,7 +53,6 @@ export default {
       })();
     },
     stopTimer: function() {
-      console.log("stopTimer");
       this.isCount = false;
       cancelAnimationFrame(this.animateFrame);
       localStorage.setItem("remainTime", this.remainTime);
@@ -63,6 +61,10 @@ export default {
       this.stopTimer();
       this.remainTime = 0;
       localStorage.setItem("remainTime", this.remainTime);
+    },
+    resetTimer: function() {
+      this.remainTime = 3600000;
+      localStorage.setItem("remainTime", this.remainTime);
     }
   },
   computed: {
@@ -70,22 +72,13 @@ export default {
       return this.remainTime;
     },
     remainMin: function() {
+      if (this.remainTime == 3600000) {
+        return 60;
+      }
       return Math.floor(this.remainTime / 1000 / 60) % 60;
     },
     remainSec: function() {
       return Math.floor(this.remainTime / 1000) % 60;
-    },
-    chartData: function() {
-      let remainMinForChart = this.remainMin;
-      return {
-        datasets: [
-          {
-            data: [60 - this.remainMin, this.remainMin],
-            backgroundColor: ["#DDDFBD", "#F8D32F"]
-          }
-        ],
-        labels: ["消費時間", "残り時間"]
-      };
     }
   }
 };
@@ -113,14 +106,42 @@ export default {
   height: 50px;
   border-radius: 15px;
   border: none;
+  outline: none;
+  background: #1d1c22;
 }
 
 .all__button-start {
-  background: #fff;
+  background-image: url(../assets/play.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .all__button-stop {
-  background: #1d1c22;
-  color: #fff;
+  background-image: url(../assets/stop.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.all__button-reset {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  outline: none;
+  background: none;
+  background-image: url(../assets/reset.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.2s;
+  transform: rotateY(0deg);
+}
+
+.all__button-reset:active {
+  transform: rotateY(360deg);
 }
 </style>

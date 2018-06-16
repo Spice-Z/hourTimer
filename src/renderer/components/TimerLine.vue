@@ -1,6 +1,6 @@
 <template>
   <div class="timer">
-    <p class="timer__time">{{this.remainMin}}:{{this.remainSec}}</p>
+    <p class="timer__time">{{this.remainMin}}:{{this.remainSec | doubleDigit }}</p>
     <canvas id="timerLine" width="1000" height="1000"></canvas>
   </div>
 </template>
@@ -45,6 +45,7 @@ export default {
       return;
     }
     let ctx = this.ctx;
+    ctx.strokeStyle = "#1D1C22";
     ctx.beginPath();
     let remainAngle = (60 - this.remainMin) * 6 - 90;
     ctx.arc(500, 500, 450, -90 * Math.PI / 180, remainAngle * Math.PI / 180);
@@ -60,6 +61,15 @@ export default {
       ctx.arc(500, 500, 450, 0 * Math.PI / 180, 360 * Math.PI / 180);
       ctx.stroke();
       ctx.closePath();
+    }
+  },
+  filters: {
+    doubleDigit: function(value) {
+      if (value < 10) {
+        console.log("0".value);
+        return "0" + value;
+      }
+      return value;
     }
   }
 };
