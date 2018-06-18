@@ -46,15 +46,16 @@ export default {
         if (vm.remainTime % 10000 < 20) {
           localStorage.setItem("remainTime", vm.remainTime);
         }
-        if (vm.remainTime <= 0) {
+        if (vm.remainTime > 0) {
+          vm.animateFrame = requestAnimationFrame(loop);
+        } else {
           vm.finishTimer();
         }
-        vm.animateFrame = requestAnimationFrame(loop);
       })();
     },
     stopTimer: function() {
-      this.isCount = false;
       cancelAnimationFrame(this.animateFrame);
+      this.isCount = false;
       localStorage.setItem("remainTime", this.remainTime);
     },
     finishTimer: function() {

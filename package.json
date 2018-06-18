@@ -2,7 +2,7 @@
   "name": "hour-timer",
   "version": "1.0.0",
   "author": "Yugo Ogura",
-  "description": "An electron-vue project",
+  "description": "One hour timer crated with electron-vue ",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {

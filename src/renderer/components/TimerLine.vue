@@ -66,7 +66,6 @@ export default {
   filters: {
     doubleDigit: function(value) {
       if (value < 10) {
-        console.log("0".value);
         return "0" + value;
       }
       return value;
