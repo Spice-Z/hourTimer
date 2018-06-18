@@ -39,22 +39,22 @@ export default {
       vm.isCount = true;
       vm.startedTime = Math.floor(performance.now() - vm.diffTime);
       (function loop() {
-        let loopfps = vm.diffTime;
+        let preDiffTime = vm.diffTime;
         vm.nowTime = Math.floor(performance.now());
         vm.diffTime = vm.nowTime - vm.startedTime;
-        vm.remainTime -= vm.diffTime - loopfps;
+        vm.remainTime -= vm.diffTime - preDiffTime;
         if (vm.remainTime % 10000 < 20) {
           localStorage.setItem("remainTime", vm.remainTime);
         }
         if (vm.remainTime > 0) {
-          vm.animateFrame = requestAnimationFrame(loop);
+          vm.timeCountFrame = requestAnimationFrame(loop);
         } else {
           vm.finishTimer();
         }
       })();
     },
     stopTimer: function() {
-      cancelAnimationFrame(this.animateFrame);
+      cancelAnimationFrame(this.timeCountFrame);
       this.isCount = false;
       localStorage.setItem("remainTime", this.remainTime);
     },
